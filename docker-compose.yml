@@ -1,0 +1,44 @@
+services:
+  mongodb:
+    image: mongo:8.0
+    container_name: agent-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin123
+      - MONGO_INITDB_DATABASE=agent_db
+    volumes:
+      - mongodb_data:/data/db
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  agent:
+    build: .
+    ports:
+      - "8001:8001"
+    environment:
+      - PORT=8001
+    env_file:
+      - dev.env
+    volumes:
+      # Only mount artifacts for file operations
+      - ./artifacts:/app/artifacts
+      - ./logs:/app/logs
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  mongodb_data:

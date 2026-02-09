@@ -1,0 +1,16 @@
+[project]
+name = "yc-hack2"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "httpx>=0.28.1",
+    "pydantic>=2.12.5",
+    "python-dotenv>=1.2.1",
+    "fastapi>=0.115.0",
+    "uvicorn>=0.34.0",
+    "pymongo>=4.10.1",
+    "voyageai>=0.3.3",
+    "mcp>=1.0.0",
+]

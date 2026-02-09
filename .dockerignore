@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Environment files
+*.env
+dev.env
+.env.local
+
+# Generated/Runtime files
+artifacts/
+logs/
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+understand/
+*.md
+!README.md
+
+# Tests
+test_*.py
+example_*.py
+view_conversations.py
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
